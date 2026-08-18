@@ -416,19 +416,21 @@ export const TournamentsView: React.FC<TournamentsViewProps> = ({
         </div>
 
         {/* TABS */}
-        <div className="flex items-center gap-2 border-b border-[#1e2230] pt-4 overflow-x-auto">
+        <div className="tx-nav-scroll flex min-w-0 snap-x snap-mandatory items-center gap-1 overflow-x-auto border-b border-[#1e2230] pt-4 scroll-smooth sm:gap-2">
           {(['OVERVIEW', 'BRACKET', 'MATCHES', 'STANDINGS'] as const).map((tab) => (
             <button
               key={tab}
               id={`tab-tournament-${tab.toLowerCase()}`}
               onClick={() => setActiveTab(tab)}
-              className={`px-5 py-3 text-xs font-black tracking-wider uppercase transition-all border-b-2 whitespace-nowrap cursor-pointer font-tech ${
+              aria-label={tab === 'OVERVIEW' ? 'Información del torneo' : tab === 'BRACKET' ? 'Cuadro y bracket' : tab === 'MATCHES' ? 'Partidos' : 'Clasificación'}
+              className={`shrink-0 snap-start whitespace-nowrap border-b-2 px-3 py-3 text-[11px] font-black uppercase tracking-wide transition-all sm:px-5 sm:text-xs sm:tracking-wider cursor-pointer font-tech ${
                 activeTab === tab
                   ? 'border-[#ff2e83] text-[#ff2e83] bg-[#ff2e83]/5'
                   : 'border-transparent text-slate-400 hover:text-slate-200'
               }`}
             >
-              {tab === 'OVERVIEW' ? 'INFORMACIÓN' : tab === 'BRACKET' ? 'CUADRO / BRACKET' : tab === 'MATCHES' ? 'PARTIDOS' : 'CLASIFICACIÓN'}
+              <span className="sm:hidden">{tab === 'OVERVIEW' ? 'INFO' : tab === 'BRACKET' ? 'BRACKET' : tab === 'MATCHES' ? 'PARTIDOS' : 'TABLA'}</span>
+              <span className="hidden sm:inline">{tab === 'OVERVIEW' ? 'INFORMACIÓN' : tab === 'BRACKET' ? 'CUADRO / BRACKET' : tab === 'MATCHES' ? 'PARTIDOS' : 'CLASIFICACIÓN'}</span>
             </button>
           ))}
         </div>
